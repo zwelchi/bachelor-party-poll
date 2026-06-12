@@ -1,128 +1,119 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bachelor Party — Pick Your Weekend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root, [data-theme="light"] {
+  --color-bg:#f7f6f2; --color-surface:#f9f8f5; --color-surface-2:#fbfbf9; --color-surface-offset:#f3f0ec;
+  --color-divider:#dcd9d5; --color-border:#d4d1ca; --color-text:#28251d; --color-text-muted:#7a7974;
+  --color-text-faint:#bab9b4; --color-primary:#01696f; --color-primary-hover:#0c4e54; --color-primary-highlight:#cedcd8;
+  --color-success:#437a22; --color-success-highlight:#d4dfcc; --color-error:#a12c7b; --color-error-highlight:#e0ced7;
+  --shadow-sm:0 1px 2px oklch(0.2 0.01 80 / 0.06); --shadow-md:0 4px 12px oklch(0.2 0.01 80 / 0.08); --shadow-lg:0 12px 32px oklch(0.2 0.01 80 / 0.12);
+  --radius-sm:.375rem; --radius-md:.5rem; --radius-lg:.75rem; --radius-xl:1rem; --radius-full:9999px;
+  --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem;
+  --text-xs:clamp(.75rem,.7rem + .25vw,.875rem); --text-sm:clamp(.875rem,.8rem + .35vw,1rem); --text-base:clamp(1rem,.95rem + .25vw,1.125rem); --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem); --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem); --text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --font-display:'Instrument Serif', Georgia, serif; --font-body:'Work Sans', 'Helvetica Neue', sans-serif; --transition:180ms cubic-bezier(0.16,1,0.3,1); --content-narrow:640px;
+}
+[data-theme="dark"] {
+  --color-bg:#171614; --color-surface:#1c1b19; --color-surface-2:#201f1d; --color-surface-offset:#1d1c1a; --color-divider:#262523; --color-border:#393836;
+  --color-text:#cdccca; --color-text-muted:#9b9a97; --color-text-faint:#5a5957; --color-primary:#4f98a3; --color-primary-hover:#227f8b; --color-primary-highlight:#313b3b;
+  --color-success:#6daa45; --color-success-highlight:#3a4435; --color-error:#d163a7; --color-error-highlight:#4c3d46;
+  --shadow-sm:0 1px 2px oklch(0 0 0 / .2); --shadow-md:0 4px 12px oklch(0 0 0 / .3); --shadow-lg:0 12px 32px oklch(0 0 0 / .4);
+}
+*{box-sizing:border-box;margin:0;padding:0} html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth} body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);line-height:1.6} input,button,textarea{font:inherit;color:inherit} button{cursor:pointer;background:none;border:none} :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+.page-wrap{min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:var(--space-8) var(--space-4)} .container{width:100%;max-width:var(--content-narrow)}
+header{width:100%;max-width:var(--content-narrow);display:flex;align-items:center;justify-content:space-between;padding-bottom:var(--space-8);border-bottom:1px solid var(--color-divider);margin-bottom:var(--space-8)}
+.logo{display:flex;align-items:center;gap:var(--space-3);text-decoration:none;color:var(--color-text)} .logo svg{color:var(--color-primary)} .logo-text{font-family:var(--font-display);font-size:var(--text-lg);font-style:italic}
+.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);color:var(--color-text-muted)}
+.hero{text-align:center;margin-bottom:var(--space-10)} .hero h1{font-family:var(--font-display);font-size:var(--text-2xl);margin-bottom:var(--space-3)} .hero h1 em{color:var(--color-primary);font-style:italic} .hero p{color:var(--color-text-muted);max-width:48ch;margin:0 auto}
+.card{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .1);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-sm)}
+.form-group{margin-bottom:var(--space-6)} label.field-label{display:block;font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-2)} .optional-tag{font-size:var(--text-xs);font-weight:400;color:var(--color-text-faint);margin-left:var(--space-2)}
+input[type="text"],textarea{width:100%;padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base)} input[type="text"]:focus,textarea:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px oklch(from var(--color-primary) l c h / .15)} textarea{resize:vertical;min-height:80px}
+.weekends-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)} .weekend-item{position:relative} .weekend-item input[type="checkbox"]{position:absolute;opacity:0;width:1px;height:1px}
+.weekend-label{display:flex;align-items:flex-start;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1.5px solid var(--color-border);border-radius:var(--radius-lg);cursor:pointer;transition:border-color var(--transition),background var(--transition),box-shadow var(--transition);user-select:none}
+.weekend-label:hover{border-color:var(--color-primary);box-shadow:var(--shadow-sm)} .weekend-item input[type="checkbox"]:checked + .weekend-label{border-color:var(--color-primary);background:var(--color-primary-highlight);box-shadow:var(--shadow-sm)}
+.checkbox-box{flex-shrink:0;width:18px;height:18px;margin-top:2px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface);display:flex;align-items:center;justify-content:center} .weekend-item input[type="checkbox"]:checked + .weekend-label .checkbox-box{background:var(--color-primary);border-color:var(--color-primary)} .checkbox-box svg{display:none} .weekend-item input[type="checkbox"]:checked + .weekend-label .checkbox-box svg{display:block}
+.weekend-dates{display:flex;flex-direction:column;gap:2px} .weekend-range{font-size:var(--text-sm);font-weight:600} .weekend-day{font-size:var(--text-xs);color:var(--color-text-muted)}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);width:100%;padding:var(--space-3) var(--space-6);background:var(--color-primary);color:#fff;font-size:var(--text-sm);font-weight:600;border-radius:var(--radius-md);transition:background var(--transition),box-shadow var(--transition),transform var(--transition)} .btn-primary:hover{background:var(--color-primary-hover);box-shadow:var(--shadow-md)} .btn-primary:disabled{opacity:.55;cursor:not-allowed}
+.btn-ghost{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-4);color:var(--color-primary);font-size:var(--text-sm);font-weight:600;border-radius:var(--radius-md)} .btn-ghost:hover{background:var(--color-primary-highlight)}
+.msg{padding:var(--space-3) var(--space-4);border-radius:var(--radius-md);font-size:var(--text-sm);margin-top:var(--space-4);display:none} .msg.success{background:var(--color-success-highlight);color:var(--color-success);display:block} .msg.error{background:var(--color-error-highlight);color:var(--color-error);display:block}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6)} .results-header h2{font-family:var(--font-display);font-size:var(--text-xl);font-style:italic}
+.result-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--space-4);padding:var(--space-4);background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .08);border-radius:var(--radius-lg);margin-bottom:var(--space-3)} .result-weekend-info{display:flex;flex-direction:column;gap:2px} .result-weekend-name{font-weight:600;font-size:var(--text-sm)} .result-names{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1)}
+.result-count{display:flex;align-items:center;justify-content:center;min-width:44px;height:36px;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-sm);font-weight:700;border-radius:var(--radius-full);padding:0 var(--space-3)} .result-bar-wrap{height:4px;background:var(--color-divider);border-radius:999px;margin-top:var(--space-2);overflow:hidden} .result-bar{height:100%;background:var(--color-primary);border-radius:999px;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite} @keyframes spin{to{transform:rotate(360deg)}}
+.tabs{display:flex;gap:var(--space-2);margin-bottom:var(--space-6);background:var(--color-surface-offset);padding:var(--space-1);border-radius:var(--radius-lg)} .tab-btn{flex:1;padding:var(--space-2) var(--space-3);font-size:var(--text-sm);font-weight:500;border-radius:calc(var(--radius-lg) - var(--space-1));color:var(--color-text-muted)} .tab-btn.active{background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-sm);font-weight:600}
+@media (max-width:480px){.weekends-grid{grid-template-columns:1fr}.card{padding:var(--space-5)}}
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
-<p class="p1">&lt;title&gt;Bachelor Party — Pick Your Weekend&lt;/title&gt;</p>
-<p class="p1">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
-<p class="p1">&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
-<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Work+Sans:wght@300..700&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p1">&lt;script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">:root, [data-theme="light"] {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-bg:#f7f6f2; --color-surface:#f9f8f5; --color-surface-2:#fbfbf9; --color-surface-offset:#f3f0ec;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-divider:#dcd9d5; --color-border:#d4d1ca; --color-text:#28251d; --color-text-muted:#7a7974;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-text-faint:#bab9b4; --color-primary:#01696f; --color-primary-hover:#0c4e54; --color-primary-highlight:#cedcd8;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-success:#437a22; --color-success-highlight:#d4dfcc; --color-error:#a12c7b; --color-error-highlight:#e0ced7;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--shadow-sm:0 1px 2px oklch(0.2 0.01 80 / 0.06); --shadow-md:0 4px 12px oklch(0.2 0.01 80 / 0.08); --shadow-lg:0 12px 32px oklch(0.2 0.01 80 / 0.12);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--radius-sm:.375rem; --radius-md:.5rem; --radius-lg:.75rem; --radius-xl:1rem; --radius-full:9999px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--text-xs:clamp(.75rem,.7rem + .25vw,.875rem); --text-sm:clamp(.875rem,.8rem + .35vw,1rem); --text-base:clamp(1rem,.95rem + .25vw,1.125rem); --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem); --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem); --text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--font-display:'Instrument Serif', Georgia, serif; --font-body:'Work Sans', 'Helvetica Neue', sans-serif; --transition:180ms cubic-bezier(0.16,1,0.3,1); --content-narrow:640px;</p>
-<p class="p1">}</p>
-<p class="p1">[data-theme="dark"] {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-bg:#171614; --color-surface:#1c1b19; --color-surface-2:#201f1d; --color-surface-offset:#1d1c1a; --color-divider:#262523; --color-border:#393836;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-text:#cdccca; --color-text-muted:#9b9a97; --color-text-faint:#5a5957; --color-primary:#4f98a3; --color-primary-hover:#227f8b; --color-primary-highlight:#313b3b;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--color-success:#6daa45; --color-success-highlight:#3a4435; --color-error:#d163a7; --color-error-highlight:#4c3d46;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--shadow-sm:0 1px 2px oklch(0 0 0 / .2); --shadow-md:0 4px 12px oklch(0 0 0 / .3); --shadow-lg:0 12px 32px oklch(0 0 0 / .4);</p>
-<p class="p1">}</p>
-<p class="p1">*{box-sizing:border-box;margin:0;padding:0} html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth} body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);line-height:1.6} input,button,textarea{font:inherit;color:inherit} button{cursor:pointer;background:none;border:none} :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}</p>
-<p class="p1">.page-wrap{min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:var(--space-8) var(--space-4)} .container{width:100%;max-width:var(--content-narrow)}</p>
-<p class="p1">header{width:100%;max-width:var(--content-narrow);display:flex;align-items:center;justify-content:space-between;padding-bottom:var(--space-8);border-bottom:1px solid var(--color-divider);margin-bottom:var(--space-8)}</p>
-<p class="p1">.logo{display:flex;align-items:center;gap:var(--space-3);text-decoration:none;color:var(--color-text)} .logo svg{color:var(--color-primary)} .logo-text{font-family:var(--font-display);font-size:var(--text-lg);font-style:italic}</p>
-<p class="p1">.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);color:var(--color-text-muted)}</p>
-<p class="p1">.hero{text-align:center;margin-bottom:var(--space-10)} .hero h1{font-family:var(--font-display);font-size:var(--text-2xl);margin-bottom:var(--space-3)} .hero h1 em{color:var(--color-primary);font-style:italic} .hero p{color:var(--color-text-muted);max-width:48ch;margin:0 auto}</p>
-<p class="p1">.card{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .1);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-sm)}</p>
-<p class="p1">.form-group{margin-bottom:var(--space-6)} label.field-label{display:block;font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-2)} .optional-tag{font-size:var(--text-xs);font-weight:400;color:var(--color-text-faint);margin-left:var(--space-2)}</p>
-<p class="p1">input[type="text"],textarea{width:100%;padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-base)} input[type="text"]:focus,textarea:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px oklch(from var(--color-primary) l c h / .15)} textarea{resize:vertical;min-height:80px}</p>
-<p class="p1">.weekends-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)} .weekend-item{position:relative} .weekend-item input[type="checkbox"]{position:absolute;opacity:0;width:1px;height:1px}</p>
-<p class="p1">.weekend-label{display:flex;align-items:flex-start;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1.5px solid var(--color-border);border-radius:var(--radius-lg);cursor:pointer;transition:border-color var(--transition),background var(--transition),box-shadow var(--transition);user-select:none}</p>
-<p class="p1">.weekend-label:hover{border-color:var(--color-primary);box-shadow:var(--shadow-sm)} .weekend-item input[type="checkbox"]:checked + .weekend-label{border-color:var(--color-primary);background:var(--color-primary-highlight);box-shadow:var(--shadow-sm)}</p>
-<p class="p1">.checkbox-box{flex-shrink:0;width:18px;height:18px;margin-top:2px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface);display:flex;align-items:center;justify-content:center} .weekend-item input[type="checkbox"]:checked + .weekend-label .checkbox-box{background:var(--color-primary);border-color:var(--color-primary)} .checkbox-box svg{display:none} .weekend-item input[type="checkbox"]:checked + .weekend-label .checkbox-box svg{display:block}</p>
-<p class="p1">.weekend-dates{display:flex;flex-direction:column;gap:2px} .weekend-range{font-size:var(--text-sm);font-weight:600} .weekend-day{font-size:var(--text-xs);color:var(--color-text-muted)}</p>
-<p class="p1">.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);width:100%;padding:var(--space-3) var(--space-6);background:var(--color-primary);color:#fff;font-size:var(--text-sm);font-weight:600;border-radius:var(--radius-md);transition:background var(--transition),box-shadow var(--transition),transform var(--transition)} .btn-primary:hover{background:var(--color-primary-hover);box-shadow:var(--shadow-md)} .btn-primary:disabled{opacity:.55;cursor:not-allowed}</p>
-<p class="p1">.btn-ghost{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-4);color:var(--color-primary);font-size:var(--text-sm);font-weight:600;border-radius:var(--radius-md)} .btn-ghost:hover{background:var(--color-primary-highlight)}</p>
-<p class="p1">.msg{padding:var(--space-3) var(--space-4);border-radius:var(--radius-md);font-size:var(--text-sm);margin-top:var(--space-4);display:none} .msg.success{background:var(--color-success-highlight);color:var(--color-success);display:block} .msg.error{background:var(--color-error-highlight);color:var(--color-error);display:block}</p>
-<p class="p1">.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6)} .results-header h2{font-family:var(--font-display);font-size:var(--text-xl);font-style:italic}</p>
-<p class="p1">.result-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--space-4);padding:var(--space-4);background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .08);border-radius:var(--radius-lg);margin-bottom:var(--space-3)} .result-weekend-info{display:flex;flex-direction:column;gap:2px} .result-weekend-name{font-weight:600;font-size:var(--text-sm)} .result-names{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1)}</p>
-<p class="p1">.result-count{display:flex;align-items:center;justify-content:center;min-width:44px;height:36px;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-sm);font-weight:700;border-radius:var(--radius-full);padding:0 var(--space-3)} .result-bar-wrap{height:4px;background:var(--color-divider);border-radius:999px;margin-top:var(--space-2);overflow:hidden} .result-bar{height:100%;background:var(--color-primary);border-radius:999px;transition:width .6s cubic-bezier(.16,1,.3,1)}</p>
-<p class="p1">.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite} @keyframes spin{to{transform:rotate(360deg)}}</p>
-<p class="p1">.tabs{display:flex;gap:var(--space-2);margin-bottom:var(--space-6);background:var(--color-surface-offset);padding:var(--space-1);border-radius:var(--radius-lg)} .tab-btn{flex:1;padding:var(--space-2) var(--space-3);font-size:var(--text-sm);font-weight:500;border-radius:calc(var(--radius-lg) - var(--space-1));color:var(--color-text-muted)} .tab-btn.active{background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-sm);font-weight:600}</p>
-<p class="p1">@media (max-width:480px){.weekends-grid{grid-template-columns:1fr}.card{padding:var(--space-5)}}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1">&lt;div class="page-wrap"&gt;</p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;a href="#" class="logo" aria-label="Bachelor Party Poll"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"&gt;&lt;circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.8"/&gt;&lt;path d="M8 14l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;span class="logo-text"&gt;The Big Weekend&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="theme-toggle" data-theme-toggle aria-label="Switch theme"&gt;&lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;circle cx="12" cy="12" r="5"/&gt;&lt;path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/&gt;&lt;/svg&gt;&lt;/button&gt;</p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tabs" role="tablist"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="tab-btn active" role="tab" aria-selected="true" data-tab="vote"&gt;Vote&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="tab-btn" role="tab" aria-selected="false" data-tab="results"&gt;Results&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="vote-tab"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;Pick your &lt;em&gt;free weekends&lt;/em&gt;&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Check every weekend you're available. We'll find the best one for the whole crew.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;form id="vote-form" novalidate&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="form-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="field-label" for="name-input"&gt;Your name&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" id="name-input" placeholder="e.g. Jake" autocomplete="given-name" required /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="form-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="field-label"&gt;Available weekends&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="weekends-grid" id="weekends-grid" role="group" aria-label="Available weekends"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="form-group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label class="field-label" for="note-input"&gt;Note &lt;span class="optional-tag"&gt;optional&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea id="note-input" placeholder="Any constraints, strong preferences, etc."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="submit" class="btn-primary" id="submit-btn"&gt;&lt;span id="submit-label"&gt;Submit my availability&lt;/span&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="vote-msg" class="msg" role="alert" aria-live="polite"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/form&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="results-tab" style="display:none"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="results-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Who's free when?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn-ghost" id="refresh-btn" aria-label="Refresh results"&gt;&lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"&gt;&lt;polyline points="23 4 23 10 17 10"/&gt;&lt;path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/&gt;&lt;/svg&gt;Refresh&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="results-list"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="results-msg" class="msg" role="alert" aria-live="polite"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">const SUPABASE_URL = 'https://xhavqvfpnpnibztmeuno.supabase.co';</p>
-<p class="p1">const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYXZxdmZwbnBuaWJ6dG1ldW5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mzk4MzQsImV4cCI6MjA5NjUxNTgzNH0.zvUWIy_3VLhByUUmU_Lm3aGkuD13t2i7k1xwRwh_1PA';</p>
-<p class="p1">(function(){const t=document.querySelector('[data-theme-toggle]');const r=document.documentElement;let d=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.setAttribute('data-theme',d);function setIcon(mode){t.innerHTML=mode==='dark'?'&lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;circle cx="12" cy="12" r="5"/&gt;&lt;path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/&gt;&lt;/svg&gt;':'&lt;svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/&gt;&lt;/svg&gt;';t.setAttribute('aria-label','Switch to '+(mode==='dark'?'light':'dark')+' mode')} setIcon(d);t.addEventListener('click',()=&gt;{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);setIcon(d)})})();</p>
-<p class="p1">const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);</p>
-<p class="p1">function getNext8Weekends(){const weekends=[];const today=new Date();const d=new Date(today);while(d.getDay()!==5)d.setDate(d.getDate()+1);for(let i=0;i&lt;8;i++){const fri=new Date(d);const sun=new Date(d);sun.setDate(d.getDate()+2);const fmt=(dt)=&gt;dt.toLocaleDateString('en-US',{month:'short',day:'numeric'});const fmtFull=(dt)=&gt;dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});weekends.push({id:`wknd_${i}`,label:`${fmt(fri)} – ${fmt(sun)}`,sublabel:`${fmtFull(fri)} → ${fmtFull(sun)}`,fri:fri.toISOString().slice(0,10)});d.setDate(d.getDate()+7)}return weekends}</p>
-<p class="p1">const WEEKENDS=getNext8Weekends();</p>
-<p class="p1">const grid=document.getElementById('weekends-grid');</p>
-<p class="p1">WEEKENDS.forEach(w=&gt;{const div=document.createElement('div');div.className='weekend-item';div.innerHTML=`&lt;input type="checkbox" id="${w.id}" name="weekends" value="${w.fri}" /&gt;&lt;label class="weekend-label" for="${w.id}"&gt;&lt;span class="checkbox-box"&gt;&lt;svg width="10" height="8" viewBox="0 0 10 8" fill="none"&gt;&lt;path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class="weekend-dates"&gt;&lt;span class="weekend-range"&gt;${w.label}&lt;/span&gt;&lt;span class="weekend-day"&gt;${w.sublabel.split('→')[0].trim()}&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;`;grid.appendChild(div)});</p>
-<p class="p1">document.querySelectorAll('.tab-btn').forEach(btn=&gt;{btn.addEventListener('click',()=&gt;{document.querySelectorAll('.tab-btn').forEach(b=&gt;{b.classList.remove('active');b.setAttribute('aria-selected','false')});btn.classList.add('active');btn.setAttribute('aria-selected','true');const tab=btn.dataset.tab;document.getElementById('vote-tab').style.display=tab==='vote'?'':'none';document.getElementById('results-tab').style.display=tab==='results'?'':'none';if(tab==='results')loadResults()})});</p>
-<p class="p1">const form=document.getElementById('vote-form'); const submitBtn=document.getElementById('submit-btn'); const submitLabel=document.getElementById('submit-label'); const voteMsg=document.getElementById('vote-msg');</p>
-<p class="p1">form.addEventListener('submit',async(e)=&gt;{e.preventDefault();voteMsg.className='msg';voteMsg.textContent='';const name=document.getElementById('name-input').value.trim();const note=document.getElementById('note-input').value.trim();const checked=[...document.querySelectorAll('input[name="weekends"]:checked')].map(c=&gt;c.value);if(!name){voteMsg.textContent='Please enter your name.';voteMsg.className='msg error';document.getElementById('name-input').focus();return} if(checked.length===0){voteMsg.textContent='Please select at least one weekend.';voteMsg.className='msg error';return} submitBtn.disabled=true;submitLabel.innerHTML='&lt;div class="spinner"&gt;&lt;/div&gt;';const { error } = await supabase.from('bachelor_votes').insert([{ name, weekends: checked, note: note || null }]);submitBtn.disabled=false;submitLabel.textContent='Submit my availability';if(error){voteMsg.textContent='Something went wrong: '+error.message;voteMsg.className='msg error'} else {voteMsg.textContent='🎉 Got it, '+name+'!<span class="Apple-converted-space"> </span></p>
+<div class="page-wrap">
+<header>
+  <a href="#" class="logo" aria-label="Bachelor Party Poll">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.8"/><path d="M8 14l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="logo-text">The Big Weekend</span>
+  </a>
+  <button class="theme-toggle" data-theme-toggle aria-label="Switch theme"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+</header>
+<div class="container">
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="vote">Vote</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="results">Results</button>
+  </div>
+  <div id="vote-tab">
+    <div class="hero">
+      <h1>Pick your <em>free weekends</em></h1>
+      <p>Check every weekend you're available. We'll find the best one for the whole crew.</p>
+    </div>
+    <div class="card">
+      <form id="vote-form" novalidate>
+        <div class="form-group">
+          <label class="field-label" for="name-input">Your name</label>
+          <input type="text" id="name-input" placeholder="e.g. Jake" autocomplete="given-name" required />
+        </div>
+        <div class="form-group">
+          <label class="field-label">Available weekends</label>
+          <div class="weekends-grid" id="weekends-grid" role="group" aria-label="Available weekends"></div>
+        </div>
+        <div class="form-group">
+          <label class="field-label" for="note-input">Note <span class="optional-tag">optional</span></label>
+          <textarea id="note-input" placeholder="Any constraints, strong preferences, etc."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn"><span id="submit-label">Submit my availability</span></button>
+        <div id="vote-msg" class="msg" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+  <div id="results-tab" style="display:none">
+    <div class="results-header">
+      <h2>Who's free when?</h2>
+      <button class="btn-ghost" id="refresh-btn" aria-label="Refresh results"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>Refresh</button>
+    </div>
+    <div id="results-list"></div>
+    <div id="results-msg" class="msg" role="alert" aria-live="polite"></div>
+  </div>
+</div>
+</div>
+<script>
+const SUPABASE_URL = 'https://xhavqvfpnpnibztmeuno.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYXZxdmZwbnBuaWJ6dG1ldW5vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mzk4MzQsImV4cCI6MjA5NjUxNTgzNH0.zvUWIy_3VLhByUUmU_Lm3aGkuD13t2i7k1xwRwh_1PA';
+(function(){const t=document.querySelector('[data-theme-toggle]');const r=document.documentElement;let d=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.setAttribute('data-theme',d);function setIcon(mode){t.innerHTML=mode==='dark'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';t.setAttribute('aria-label','Switch to '+(mode==='dark'?'light':'dark')+' mode')} setIcon(d);t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);setIcon(d)})})();
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+function getNext8Weekends(){const weekends=[];const today=new Date();const d=new Date(today);while(d.getDay()!==5)d.setDate(d.getDate()+1);for(let i=0;i<8;i++){const fri=new Date(d);const sun=new Date(d);sun.setDate(d.getDate()+2);const fmt=(dt)=>dt.toLocaleDateString('en-US',{month:'short',day:'numeric'});const fmtFull=(dt)=>dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});weekends.push({id:`wknd_${i}`,label:`${fmt(fri)} – ${fmt(sun)}`,sublabel:`${fmtFull(fri)} → ${fmtFull(sun)}`,fri:fri.toISOString().slice(0,10)});d.setDate(d.getDate()+7)}return weekends}
+const WEEKENDS=getNext8Weekends();
+const grid=document.getElementById('weekends-grid');
+WEEKENDS.forEach(w=>{const div=document.createElement('div');div.className='weekend-item';div.innerHTML=`<input type="checkbox" id="${w.id}" name="weekends" value="${w.fri}" /><label class="weekend-label" for="${w.id}"><span class="checkbox-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="weekend-dates"><span class="weekend-range">${w.label}</span><span class="weekend-day">${w.sublabel.split('→')[0].trim()}</span></span></label>`;grid.appendChild(div)});
+document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false')});btn.classList.add('active');btn.setAttribute('aria-selected','true');const tab=btn.dataset.tab;document.getElementById('vote-tab').style.display=tab==='vote'?'':'none';document.getElementById('results-tab').style.display=tab==='results'?'':'none';if(tab==='results')loadResults()})});
+const form=document.getElementById('vote-form'); const submitBtn=document.getElementById('submit-btn'); const submitLabel=document.getElementById('submit-label'); const voteMsg=document.getElementById('vote-msg');
+form.addEventListener('submit',async(e)=>{e.preventDefault();voteMsg.className='msg';voteMsg.textContent='';const name=document.getElementById('name-input').value.trim();const note=document.getElementById('note-input').value.trim();const checked=[...document.querySelectorAll('input[name="weekends"]:checked')].map(c=>c.value);if(!name){voteMsg.textContent='Please enter your name.';voteMsg.className='msg error';document.getElementById('name-input').focus();return} if(checked.length===0){voteMsg.textContent='Please select at least one weekend.';voteMsg.className='msg error';return} submitBtn.disabled=true;submitLabel.innerHTML='<div class="spinner"></div>';const { error } = await supabase.from('bachelor_votes').insert([{ name, weekends: checked, note: note || null }]);submitBtn.disabled=false;submitLabel.textContent='Submit my availability';if(error){voteMsg.textContent='Something went wrong: '+error.message;voteMsg.className='msg error'} else {voteMsg.textContent='🎉 Got it, '+name+'! Your availability is in.';voteMsg.className='msg success';form.reset()}});
+const resultsList=document.getElementById('results-list'); const resultsMsg=document.getElementById('results-msg');
+async function loadResults(){resultsMsg.className='msg';resultsMsg.textContent='';resultsList.innerHTML='<p style="color:var(--color-text-muted);font-size:var(--text-sm)">Loading…</p>';const { data, error } = await supabase.from('bachelor_votes').select('name, weekends, note');if(error){resultsList.innerHTML='';resultsMsg.textContent='Could not load results: '+error.message;resultsMsg.className='msg error';return} const counts={};WEEKENDS.forEach(w=>{counts[w.fri]={label:w.label,names:[]}});data.forEach(v=>{(v.weekends||[]).forEach(d=>{if(counts[d])counts[d].names.push(v.name)})});const rows=WEEKENDS.map(w=>counts[w.fri]);const max=Math.max(1,...rows.map(r=>r.names.length));resultsList.innerHTML=rows.map(r=>`<div class="result-row"><div class="result-weekend-info"><span class="result-weekend-name">${r.label}</span><span class="result-names">${r.names.length?r.names.join(', '):'No one yet'}</span><div class="result-bar-wrap"><div class="result-bar" style="width:${(r.names.length/max)*100}%"></div></div></div><div class="result-count">${r.names.length}</div></div>`).join('');if(data.length===0){resultsMsg.textContent='No votes yet. Be the first!';resultsMsg.className='msg success'}}
+document.getElementById('refresh-btn').addEventListener('click',loadResults);
+</script>
 </body>
 </html>
